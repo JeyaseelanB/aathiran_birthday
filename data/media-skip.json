@@ -1,0 +1,11 @@
+{
+  "_comment": "Near-duplicate burst frames — kept on disk, left out of the gallery. Add a file name here to hide it. Run `npm run media` after editing.",
+  "skip": [
+    "1000025853.jpg.jpeg",
+    "1000199827.jpg.jpeg",
+    "1000263596.jpg.jpeg",
+    "IMG-20260819-123149.jpeg",
+    "IMG-20260819-123157.jpeg",
+    "VID-20260819-123156.mp4"
+  ]
+}
