@@ -1,7 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Fredoka, Nunito } from "next/font/google";
-import EntryGate from "@/components/birthday/EntryGate";
-import { MusicProvider } from "@/components/birthday/MusicProvider";
 import { birthdayData } from "@/data/birthday";
 import { allPhotos } from "@/data/media";
 import "./globals.css";
@@ -50,11 +48,7 @@ export default function RootLayout({
         >
           Skip to content
         </a>
-        {/* One audio element for the whole site, and the first-visit
-            welcome screen that starts it. */}
-        <MusicProvider src={birthdayData.musicSrc}>
-          <EntryGate name={birthdayData.name}>{children}</EntryGate>
-        </MusicProvider>
+        {children}
       </body>
     </html>
   );

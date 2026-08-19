@@ -21,6 +21,7 @@ export default function Home() {
     heroMessage,
     finalMessage,
     surpriseMessage,
+    musicSrc,
     wishes,
     milestones,
     navLinks,
@@ -48,7 +49,7 @@ export default function Home() {
         <FinalMessage name={name} message={finalMessage} />
       </main>
 
-      <MusicPlayer />
+      <MusicPlayer src={musicSrc} />
       <Footer name={name} year={new Date().getFullYear()} />
     </>
   );
