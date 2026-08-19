@@ -1,0 +1,206 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: var(--font-fredoka), "Trebuchet MS", system-ui, sans-serif;
+  --font-body: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
+
+  /* Playful birthday palette */
+  --color-sky-soft: #e6f4ff;
+  --color-baby: #7cc7ff;
+  --color-ocean: #2f8fe0;
+  --color-bubble: #ff8fc2;
+  --color-candy: #ff5fa2;
+  --color-sunny: #ffd449;
+  --color-mango: #ff9f43;
+  --color-grape: #a97bff;
+  --color-mint: #63dcc0;
+  --color-ink: #24344d;
+  --color-ink-soft: #5a6b85;
+
+  --shadow-soft: 0 18px 45px -20px rgba(47, 143, 224, 0.45);
+  --shadow-glow: 0 0 40px -8px rgba(255, 143, 194, 0.55);
+
+  --animate-float-slow: float 9s ease-in-out infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-twinkle: twinkle 3.2s ease-in-out infinite;
+  --animate-wiggle: wiggle 2.6s ease-in-out infinite;
+
+  --breakpoint-xs: 22rem;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /*
+      Offset for anchor jumps from the navbar. Every section already opens with
+      py-20/sm:py-24 of its own, which is more than the fixed bar is tall — so
+      this only needs a hair of breathing room. Setting it to the bar height
+      instead stacks on top of that padding and leaves a big empty band under
+      the navbar when you jump to a section.
+    */
+    scroll-padding-top: 0.5rem;
+  }
+
+  body {
+    background:
+      radial-gradient(60rem 40rem at 10% -10%, #ffe8f4 0%, transparent 60%),
+      radial-gradient(50rem 35rem at 100% 0%, #fff6d8 0%, transparent 55%),
+      linear-gradient(180deg, #f2faff 0%, #ffffff 45%, #f7f2ff 100%);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+
+  ::selection {
+    background: var(--color-sunny);
+    color: var(--color-ink);
+  }
+
+  /*
+    A scrollbar in the site's own palette rather than the grey the OS draws.
+    WebKit gets the pseudo-elements; Firefox has no equivalent, so it falls
+    back to the two-colour standard property below. The `@supports` guard
+    matters because Chrome now understands `scrollbar-color` too, and setting
+    it there would switch off the nicer pseudo-element styling.
+  */
+  ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: rgba(230, 244, 255, 0.6);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+      180deg,
+      var(--color-baby) 0%,
+      var(--color-grape) 50%,
+      var(--color-candy) 100%
+    );
+    border: 3px solid transparent;
+    /* Padding-box + a transparent border is what insets the thumb, leaving a
+       clear gutter either side of the pill. */
+    background-clip: padding-box;
+    border-radius: 999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(
+      180deg,
+      var(--color-ocean) 0%,
+      var(--color-grape) 50%,
+      var(--color-candy) 100%
+    );
+    background-clip: padding-box;
+  }
+
+  /* Windows draws stepper arrows at both ends by default; the pill reads
+     better without them. */
+  ::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
+  @supports not selector(::-webkit-scrollbar) {
+    html {
+      scrollbar-color: var(--color-grape) rgba(230, 244, 255, 0.6);
+      scrollbar-width: thin;
+    }
+  }
+
+  /*
+    The outline follows whatever radius the element already has, so a pill
+    button gets a pill ring. Setting `border-radius` here instead would
+    reshape the element itself the moment it takes focus — which is what made
+    the focused nav link square off against its neighbours.
+  */
+  :focus-visible {
+    outline: 3px solid var(--color-ocean);
+    outline-offset: 3px;
+  }
+}
+
+@utility glass-card {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: var(--shadow-soft);
+}
+
+@utility text-rainbow {
+  background-image: linear-gradient(
+    100deg,
+    var(--color-candy) 0%,
+    var(--color-mango) 30%,
+    var(--color-sunny) 50%,
+    var(--color-mint) 70%,
+    var(--color-grape) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Users who ask for less motion get a calm, static page. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
