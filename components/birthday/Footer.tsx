@@ -16,7 +16,7 @@ export default function Footer({ name, year }: FooterProps) {
         A little digital memory book, kept safe for when he is big enough to read it.
       </p>
       <p className="mt-4 text-xs font-semibold text-white/70">
-        Built by Jeyaseelan B
+        Developed by Jeyaseelan B
         <span className="mx-1.5 text-white/30" aria-hidden="true">
           •
         </span>

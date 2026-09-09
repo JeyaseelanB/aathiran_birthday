@@ -27,7 +27,10 @@ export default function Navbar({ name, links }: NavbarProps) {
 
   const go = (href: string) => {
     setMenuOpen(false);
-    scrollTo(href);
+    // Let the menu close first. Measuring the target while the panel is still
+    // expanded, then scrolling as it collapses, fights the layout mid-flight —
+    // one frame later the page is settled and the jump lands where it should.
+    requestAnimationFrame(() => scrollTo(href));
   };
 
   return (

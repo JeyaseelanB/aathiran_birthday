@@ -13,14 +13,14 @@ Built with **Next.js 16 (App Router)**, **TypeScript**, **Tailwind CSS v4**,
 
 ```bash
 npm install     # install dependencies
-npm run dev     # start the dev server → http://localhost:3001
+npm run dev     # start the dev server → http://localhost:3002
 ```
 
 Other commands:
 
 ```bash
 npm run build   # production build
-npm start       # serve the production build (port 3001)
+npm start       # serve the production build (port 3002)
 npm run media   # rescan public/images + public/videos and rebuild the month gallery
 ```
 

@@ -19,7 +19,7 @@ const nunito = Nunito({
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3001",
+    process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3002",
   ),
   title: `Happy Birthday, ${birthdayData.name}! 🎉`,
   description: birthdayData.heroMessage,

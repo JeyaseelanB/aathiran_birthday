@@ -35,6 +35,12 @@ export function useLockBodyScroll(locked: boolean): void {
   }, [locked]);
 }
 
+/**
+ * Breathing room above a section when jumping to it. Small on purpose: every
+ * section opens with padding of its own, which already clears the fixed navbar.
+ */
+const SCROLL_OFFSET = 8;
+
 /** Calls `onEscape` whenever Escape is pressed while `active` is true. */
 export function useEscapeKey(active: boolean, onEscape: () => void): void {
   const handler = useRef(onEscape);
@@ -209,9 +215,15 @@ export function useScrollTo(): (hash: string) => void {
     const prefersReduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
-    el.scrollIntoView({
+
+    // Scrolling the window by hand rather than with `el.scrollIntoView`.
+    // scrollIntoView walks up the tree and scrolls *every* container it finds
+    // on the way, and each section here is `overflow-hidden` — which counts as
+    // one. Working out the offset ourselves targets the page and nothing else.
+    const top = el.getBoundingClientRect().top + window.scrollY - SCROLL_OFFSET;
+    window.scrollTo({
+      top: Math.max(0, top),
       behavior: prefersReduced ? "auto" : "smooth",
-      block: "start",
     });
   }, []);
 }

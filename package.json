@@ -5,10 +5,10 @@
   "scripts": {
     "media": "node scripts/generate-media.mjs",
     "predev": "node scripts/generate-media.mjs",
-    "dev": "next dev -p 3001",
+    "dev": "next dev -p 3002",
     "prebuild": "node scripts/generate-media.mjs",
     "build": "next build",
-    "start": "next start -p 3001",
+    "start": "next start -p 3002",
     "lint": "next lint"
   },
   "dependencies": {
